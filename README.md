@@ -18,13 +18,13 @@ A command-line expense tracker built in Python with JSON persistence. Tracks exp
 
 Run the interactive menu:
 
-​```bash
+```bash
 python3 main.py
-​```
+```
 
 You'll see a menu like this:
 
-​```
+```
 === Expense Tracker ===
 1. Add expense
 2. List all expenses
@@ -32,11 +32,11 @@ You'll see a menu like this:
 4. View total
 5. Quit
 Choose an option:
-​```
+```
 
 ## Example session
 
-​```
+```
 Choose an option: 1
 Description: Coffee
 Amount: 4.50
@@ -56,24 +56,24 @@ Choose an option: 4
 Total: $4.50
 By category:
   Food: $4.50
-​```
+```
 
 ## Project Structure
 
-​```
+```
 expense-tracker-cli/
 ├── expense.py    # Expense data model with JSON serialization
 ├── tracker.py    # Storage and business logic
 ├── main.py       # CLI interface
 └── data.json     # Generated at runtime (gitignored)
-​```
+```
 
 ## Architecture
 
 The project separates concerns across three files:
 
-- `expense.py` defines what a single Expense is — its fields, validation, and JSON conversion
-- `tracker.py` manages the collection of expenses — add, list, filter, total, plus persistence to disk
-- `main.py` is the user interface — menu loop, prompts, formatted output
+- `expense.py` defines what a single Expense is - its fields, validation, and JSON conversion
+- `tracker.py` manages the collection of expenses - add, list, filter, total, plus persistence to disk
+- `main.py` is the user interface - menu loop, prompts, formatted output
 
 This separation means the storage layer or UI could be swapped (e.g. to SQLite or a web frontend) without changing the data model or business logic.
