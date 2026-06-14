@@ -49,16 +49,29 @@ class ExpenseTracker:
         return expense
 
 
+    def list_all(self) -> list[Expense]:
+        return self.expenses
+
+
+    def filter_by_category(self, category: str) -> list[Expense]:
+        return [e for e in self.expenses if e.category == category]
+
+
+    def total(self, category: str | None = None) -> float:
+        if category is None:
+            return sum([e.amount for e in self.expenses])
+        
+        return sum([e.amount for e in self.expenses if e.category == category])
+
+
 if __name__ == "__main__":
     tracker = ExpenseTracker()
-    print("Loaded expenses:", tracker.expenses)
-
-    new_expense = tracker.add(
-        description="Coffee",
-        amount=4.50,
-        category="Food",
-        date="2026-05-05",
-    )
     
-    print("Added:", new_expense.to_dict())
-    print("After:", [e.to_dict() for e in tracker.expenses])
+    tracker.add(description="Coffee", amount=4.50, category="Food", date="2026-05-05")
+    tracker.add(description="Bus", amount=2.75, category="Transport", date="2026-05-05")
+    tracker.add(description="Movie", amount=15.00, category="Entertainment", date="2026-05-05")
+    
+    print("All:", [e.to_dict() for e in tracker.list_all()])
+    print("Food only:", [e.to_dict() for e in tracker.filter_by_category("Food")])
+    print("Total all:", tracker.total())
+    print("Total Food:", tracker.total("Food"))
